@@ -1,8 +1,8 @@
 {
-    "name": "snippet",
-    "displayName": "snippet",
-    "description": "make a snippet",
-    "version": "0.0.1",
+    "name": "Add-To-Snippet",
+    "displayName": "Add-To-Snippet",
+    "description": "Add select text to current language's snippet.",
+    "version": "0.1.0",
     "engines": {
         "vscode": "^1.29.0"
     },
@@ -10,14 +10,16 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onCommand:extension.AddToSnippet"
     ],
     "main": "./out/extension",
     "contributes": {
-        "commands": [{
-            "command": "extension.sayHello",
-            "title": "Hello World"
-        }]
+        "commands": [
+            {
+                "command": "extension.AddToSnippet",
+                "title": "Add-To-Snippet"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "yarn run compile",
@@ -27,10 +29,11 @@
         "test": "yarn run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "typescript": "^3.1.4",
-        "vscode": "^1.1.25",
-        "tslint": "^5.8.0",
+        "@types/mocha": "^2.2.42",
         "@types/node": "^8.10.25",
-        "@types/mocha": "^2.2.42"
-    }
+        "tslint": "^5.8.0",
+        "typescript": "^3.1.4",
+        "vscode": "^1.1.25"
+    },
+    "dependencies": {}
 }
