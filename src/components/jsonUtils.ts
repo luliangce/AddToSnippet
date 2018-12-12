@@ -50,12 +50,19 @@ function getBoolMap(data: string): boolean[] {
             if (next2Char === "//" || next2Char === "/*") {
                 inCommnet = true;
                 commentEntry = next2Char;
-                map.push(false)
-                map.push(false)
+                map.push(false, false);
                 i++;
                 continue;
             }
         }
+
+        if (cache.length > 0 && data[i] === "\\") {
+            map.push(true, true);
+            i++;
+            continue;
+        }
+
+
         if (data[i] === "'" || data[i] === '"') {
             if (data[i] === cache) {
                 cache = "";
