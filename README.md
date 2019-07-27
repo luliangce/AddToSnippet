@@ -10,7 +10,9 @@ Quick append a piece of code to language's snippet
 
 ## How to Use this
 
-simply use command `Add-To-Snippet` after you select the code you want to add
+After you select the code you want to add, you can either use:
+ - command `Add-To-Snippet` (Ctrl + Shift + P -> `Add-To-Snippet`)
+ - `alt+i` shortcut for windows or `cmd+i` for mac
 
 ## In The Future
 

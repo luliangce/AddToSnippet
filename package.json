@@ -19,6 +19,14 @@
                 "command": "extension.AddToSnippet",
                 "title": "Add-To-Snippet"
             }
+        ],
+        "keybindings": [
+            {
+                "command": "extension.AddToSnippet",
+                "key": "ctrl+i",
+                "mac": "cmd+i",
+                "when": "editorTextFocus"
+            }
         ]
     },
     "scripts": {
