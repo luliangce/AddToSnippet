@@ -1,7 +1,11 @@
 # Change Log
-All notable changes to the "snippet" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## [0.2.0]
 
-## [Unreleased]
+- Use a new JSON parser [node-jsonc-parser](https://github.com/microsoft/node-jsonc-parser) which should solve all of comments-problem
+- Add a editor/context menus shortcut,it will be active when text selected 
+- Remove keybindings
+
+
+## [0.1.0]
 - Initial release

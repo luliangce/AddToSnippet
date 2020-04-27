@@ -11,12 +11,11 @@ Quick append a piece of code to language's snippet
 ## How to Use this
 
 After you select the code you want to add, you can either use:
- - command `Add-To-Snippet` (Ctrl + Shift + P -> `Add-To-Snippet`)
- - `alt+i` shortcut for windows or `cmd+i` for mac
+ - command `Add To Snippet` (Ctrl + Shift + P -> `Add To Snippet`)
+ - or select target code and right-click,you will see `Add Selected To Snippet`
+ - ~`alt+i` shortcut for windows or `cmd+i` for mac~
 
-## In The Future
 
-support the variables maybe.
 
 ## Known Issues
 
@@ -24,9 +23,4 @@ support the variables maybe.
 
 ## Release Notes
 
-### 0.1.0
-
-the beta
-
------------------------------------------------------------------------------------------------------------
-
+[changelog](CHANGELOG.md)

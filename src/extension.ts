@@ -18,31 +18,32 @@ export function activate(context: vscode.ExtensionContext) {
         }
         let name: string | undefined = await vscode.window.showInputBox({
             prompt: "input NAME",
-            placeHolder: "default:" + "Untitled",
+            placeHolder: "Required. Esc to cancel",
             validateInput: (value: string): string => {
                 if (snippet.nameIsOk(value)) {
                     return "";
                 }
-                return "THIS NAME IS ALREADY EXISTED";
+                return `${value} IS ALREADY EXISTED`;
             }
         });
-        snippet.name = name || "Untitled";
-
+        if (name === undefined) {
+            vscode.window.showWarningMessage('canceled by user');
+            return
+        }
+        snippet.name = name
         //default prefix is the first line of snippet body
         let prefix: string | undefined = await vscode.window.showInputBox({
             prompt: `input PREFIX`,
-            placeHolder: "default:" + snippet.body[0]
+            placeHolder: `default: ${snippet.body[0]}`
         });
         snippet.prefix = prefix || snippet.body[0];
 
-        let description: string | undefined = await vscode.window.showInputBox({
+        snippet.description = await vscode.window.showInputBox({
             prompt: `input DESCRIPTION`,
-            placeHolder: "defualt:(empty)"
-        });
-        snippet.description = description || "";
+            placeHolder: "defualt:(empty)",
+        }) || "";
         snippet.saveToUserSnippet();
     });
-
     context.subscriptions.push(disposable);
 }
 

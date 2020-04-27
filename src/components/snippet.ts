@@ -10,7 +10,7 @@ import * as os from "os";
 import * as process from "process";
 import * as fs from "fs";
 import * as path from 'path';
-import { Strip, LastRightBraketIndex } from "./jsonUtils";
+import * as jp from "jsonc-parser";
 class Snippet {
     name: string | undefined;
     prefix: string | undefined;
@@ -37,8 +37,7 @@ class Snippet {
         } else {
             data = "{}";
         }
-        let parsed = Strip(data);
-        for (let name in parsed) {
+        for (let name in jp.parse(data)) {
             this.nameSet.push(name)
         }
     }
@@ -52,38 +51,25 @@ class Snippet {
         return this.nameSet.indexOf(N) === -1;
     }
 
-    //save snippet to User Snippet
-    //obviously,if this is the first snippet of language,just save it.
-    //it not,append it.
-    //but vscode snippet.json is supporting comment,and i have to keep them.
-    //a shortcut to append this is insert new data to a 100% correct position
-    //just before last "}",the real "}",not in comments
     saveToUserSnippet(): boolean {
         if (!this.nameIsOk) {
             return false;
         }
+        let data: string
         if (!this._fileExists) {
-            let toWrite = JSON.stringify(this.JSONify(), null, 2)
-            fs.writeFileSync(this.userSnippetFilePath, toWrite)
-            return true;
+            data = '{}'
+        } else {
+            data = fs.readFileSync(this.userSnippetFilePath, { encoding: "utf-8" })
         }
-
-        let data = fs.readFileSync(this.userSnippetFilePath, { encoding: "utf-8" })
-        let appendString: string = this._appendString();
-        let lrbi = LastRightBraketIndex(data);
-        let toWrite = data.slice(0, lrbi) + appendString + data.slice(lrbi);
+        let toWrite: string
+        toWrite = jp.applyEdits(data, jp.modify(data, [String(this.name)], {
+            prefix: this.prefix,
+            body: this.body,
+            description: this.description
+        }, { formattingOptions: { tabSize: 2 } }))
         fs.writeFileSync(this.userSnippetFilePath, toWrite)
         return true;
 
-    }
-
-    private _appendString(): string {
-        let toAppend = JSON.stringify(this.JSONify(), null, 2)
-        toAppend = toAppend.slice(1, -1); //delete barkets 
-        if (this.nameSet.length > 0) {
-            toAppend = "  ,\n" + toAppend;
-        }
-        return toAppend;
     }
 
     get userSnippetFilePath(): string {
@@ -104,22 +90,6 @@ class Snippet {
         return path.join(AppDataPath, "Code", "User", "snippets", `${this.language}.json`)
     }
 
-    JSONify(): object {
-        if (!this.name) {
-            return {}
-        }
-        interface Obj {
-            [index: string]: any;
-        }
-        let ret: Obj = {}
-        ret[this.name] = {
-            "prefix": this.prefix,
-            "body": this.body,
-            "description": this.description
-
-        };
-        return ret;
-    }
 }
 
 
