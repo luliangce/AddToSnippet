@@ -2,7 +2,7 @@
     "name": "add-to-snippet",
     "displayName": "Add-To-Snippet",
     "description": "Add selected code to current language's snippet.",
-    "version": "0.1.1",
+    "version": "0.2.1",
     "publisher": "50Percent",
     "repository": {
         "url": "https://github.com/luliangce/AddToSnippet.git",
