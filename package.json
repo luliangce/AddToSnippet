@@ -6,6 +6,9 @@
     "engines": {
         "vscode": "^1.29.0"
     },
+    "extensionKind": [
+        "ui"
+    ],
     "categories": [
         "Other"
     ],
