@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.2.1]
+
+- fix extensionKind problem
+
 ## [0.2.0]
 
 - Use a new JSON parser [node-jsonc-parser](https://github.com/microsoft/node-jsonc-parser) which should solve all of comments-problem
